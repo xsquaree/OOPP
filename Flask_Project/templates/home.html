@@ -1,0 +1,323 @@
+{% extends 'includes/layout.html'%}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<style>
+   * {
+    box-sizing: border-box;
+}
+
+.columns {
+    float: left;
+    width: 40.3%;
+    padding: 8px;
+}
+
+.price {
+    list-style-type: none;
+    border: 1px solid #eee;
+    margin: 0;
+    padding: 0;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.price:hover {
+    box-shadow:orange;
+}
+
+.price .header {
+    background-color: white;
+    color: black;
+    font-size: 25px;
+}
+
+.price li {
+    border-bottom: 1px solid #eee;
+    padding: 20px;
+    text-align: center;
+}
+
+.price .grey {
+    background-color: #eee;
+    font-size: 20px;
+}
+
+.button {
+    background-color: darkslategrey;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+
+
+a:hover{
+  color:orange;
+}
+
+
+
+.info {
+    background-color: #e7f3fe;
+    border-left: 6px solid #2196F3;
+}
+
+
+
+ </style>
+
+
+
+</head>
+<body>
+
+
+ <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="accounts.html">My Accounts</a>
+        </li>
+        <li class="breadcrumb-item active">Balances</li>
+      </ol>
+
+      <div class="row">
+        <div class="col-12">
+          <h1></h1>
+          <p></p>
+
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    <footer class="sticky-footer">
+      <div class="container">
+        <div class="text-center">
+          <small>Copyright © Your Website 2017</small>
+        </div>
+      </div>
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="login.html">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!--balances table-->
+      <!-- Example DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> My Accounts Overview</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Type Of Account</th>
+                  <th>Account Number</th>
+                  <th>Latest Balance(SGD)</th>
+
+                </tr>
+              </thead>
+
+              <tbody>
+              {% for user in users %}
+                <tr>
+                  <td>{{ user.get_account() }}</td>
+                  <td>{{ user.get_number() }}</td>
+                  <td>${{ user.get_balance() }}</td>
+
+              {% endfor %}
+
+                </tr>
+
+
+
+
+              </tbody>
+                <b><p>Total Balance: ${{ totalBalance }} </p></b>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+      </div>
+
+        <!--balances table-->
+
+
+         <!--fixed deposit table-->
+ <!-- Example DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Fixed Deposit Accounts</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Type Of Account</th>
+                  <th>Account Number</th>
+                  <th>Principal(SGD)</th>
+                    <th>Interest Rate</th>
+                    <th>Interest Amount</th>
+                  <th>Maturity Date</th>
+                  <th>Status</th>
+                    <th></th>
+
+                </tr>
+              </thead>
+
+              <tbody>
+
+
+                <tr>
+                  <td>DBS FIXED ACCOUNT</td>
+                  <td>123-445-31</td>
+                  <td>$5000</td>
+                    <td>0.5%</td>
+                    <td>$30</td>
+                    <td>2018/1/1</td>
+                    <td style="color:red;">1 month from maturity date</td>
+                        <td><button onClick="location.href='fda'">View Details</button></td>
+
+                </tr>
+                <tr>
+                  <td>UOB FIXED ACCOUNT</td>
+                  <td>301-556-90</td>
+                  <td>$45000</td>
+                    <td>0.5%</td>
+                    <td>$50</td>
+                    <td>2018/11/9</td>
+                    <td style="color:green;">Renewed</td>
+                        <td><button onClick="location.href='fda'">View Details</button></td>
+
+                </tr>
+
+              <tr>
+                  {% for i in fda %}
+                  <td>{{ i.get_account() }}</td>
+                  <td>{{ i.get_number() }}</td>
+                  <td>{{ i.get_balance() }}</td>
+                      <td>{{ i.get_rate() }}</td>
+                      <td>{{ i.computeInt() }}</td>
+                      <td>{{ i.get_date() }}</td>
+                      <td>{{ i.get_status() }}</td>
+                      <td><button onClick="location.href='fda'">View Details</button></td>
+
+              </tr>
+               {% endfor %}
+
+              </tbody>
+                <b><p>Total Balance: $50000 </p></b>
+                <p></p>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+      </div>
+
+<!--fixed deposit account-->
+
+
+        <!--cr card stuff-->
+        <!-- Example DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Credit Card Payments</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Type Of Account</th>
+                  <th>Credit Card Number</th>
+                    <th>Payment</th>
+                  <th>Minimum Payment</th>
+                  <th>Due date</th>
+                    <th>Card Expiry Date(mm/yy)</th>
+                    <th>Late Charges</th>
+                    <th>Status</th>
+                    <th></th>
+
+                </tr>
+              </thead>
+
+              <tbody>
+              <tr bgcolor="yellow">
+                  <td>DBS VISA </td>
+                  <td>4500-4145-3159</td>
+                    <td>$231.66</td>
+                  <td>$90.88</td>
+                  <td>31 DEC 2017</td>
+                    <td>10/22</td>
+                  <td>SGD$19</td>
+                  <td style="color:red;"><b>Unpaid</b></td>
+                    <td><button onClick="location.href='payment'">View Details</button></td>
+
+                </tr>
+
+                <tr>
+                  <td>OCBC 365</td>
+                  <td>1400-4495-3162</td>
+                    <td>0</td>
+                  <td>0</td>
+                  <td>31 DEC 2017</td>
+                    <td>11/20</td>
+                  <td></td>
+                    <td style="color:green"><b>Paid</b></td>
+                    <td><button onClick="location.href='payment'">View Details</button></td>
+
+                  <!--<td>#</td>-->
+                </tr>
+
+
+              </tbody>
+               <!-- <b><p>Total Balance: $0000 </p></b>-->
+                <!--<p>Details highlighted in yellow are the bills that are unpaid. Interest of 0.5% will be charged upon late payment and it will be shown on the status. </p>-->
+
+<div class="info">
+    <p><strong>Note:</strong>Details highlighted in yellow are the bills that are unpaid.Interest of 0.5% will be charged upon late payment and it will be shown on the status.</p>
+</div>
+
+            </table>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+      </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+{% endblock %}
+</body>
+</html>

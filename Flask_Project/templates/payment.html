@@ -1,0 +1,151 @@
+{% extends 'includes/layout.html'%}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+ <style>
+    .success {
+    background-color: #ddffdd;
+    width:250px ;
+    border-left: 4px solid #4CAF50;
+     float:right;
+        display:inline-block;
+
+
+
+}
+
+    .warning {
+    background-color: #ffffcc;
+      width:250px;
+    border-left: 4px solid #ffeb3b;
+        float:right;
+        display:inline-block;
+
+
+
+}
+
+
+
+
+  </style>
+
+
+
+</head>
+<body>
+
+
+    <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Accounts</a>
+        </li>
+        <li class="breadcrumb-item active">Tables</li>
+      </ol>
+
+
+      <!-- Example DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> My Accounts</div>
+
+        <div class="card-body">
+            <div class="float">
+            <div class="success">
+  <p><strong>Note:</strong> Details highlighted are green are settled bills.</p>
+</div>
+       <div class="warning">
+  <p><strong>Note:</strong> Details highlighted in yellow are unsettled bills.</p>
+</div>
+            </div>
+            <h1>My Payment</h1>
+
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+
+              <thead>
+                <tr>
+                  <th>Opening Date</th>
+                  <th>Closing Date</th>
+                  <th>Credit Card</th>
+                  <th>Fees Charge</th>
+                  <th>Current Amount Due </th>
+                  <th>Past Amount Due</th>
+                  <th>Min. Payable </th>
+                  <th>Total Payable</th>
+                  <th></th>
+
+                </tr>
+              </thead>
+
+              <tbody>
+
+
+                <tr bgcolor="#ddffdd">
+                  <td>2017/09/01</td>
+                  <td>2017/09/31</td>
+                  <td>DBS VISA</td>
+                  <td>0</td>
+                  <td>SGD100</td>
+                  <td>0</td>
+                  <td><b>SGD20</b></td>
+                  <td><b>SGD110</b></td>
+                  <td>Paid min. amount of $20</td>
+                </tr>
+
+
+
+
+                <tr bgcolor="#ddffdd">
+                  <td>2017/10/01</td>
+                  <td>2017/10/31</td>
+                  <td>DBS VISA</td>
+                  <td>0</td>
+                  <td>SGD120</td>
+                  <td>SGD110</td>
+                  <td><b>SGD80</b></td>
+                  <td><b>0</b></td>
+                  <td>Paid full amount of $230</td>
+
+                </tr>
+
+
+                <tr  bgcolor="#ffffcc">
+                  <td>2017/11/01</td>
+                  <td>2017/12/31</td>
+                  <td>DBS VISA</td>
+                  <td>SGD19</td>
+                  <td>SGD300</td>
+                  <td>0</td>
+                  <td><b>SGD50</b></td>
+                  <td><b>SGD319</b></td>
+                  <td>Yet to pay min. amount or full amount.</td>
+
+                </tr>
+
+
+
+              </tbody>
+
+            </table>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+      </div>
+    </div>
+
+
+
+
+
+{% endblock %}
+</body>
+</html>
